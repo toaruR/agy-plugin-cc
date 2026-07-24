@@ -216,6 +216,23 @@ function runAgy(agyArgs, { cwd } = {}) {
 
   if (!output.trim()) {
     const retry = IS_WIN ? runAgyBridge(agyArgs, opts) : runAgyPty(agyArgs, opts);
+    if (process.env.AGY_PTY_DEBUG) {
+      process.stderr.write(
+        "[pty-debug] " +
+          JSON.stringify({
+            platform: process.platform,
+            hasDevTty: existsSync("/dev/tty"),
+            term: process.env.TERM || null,
+            retryStatus: retry?.status ?? null,
+            retrySignal: retry?.signal ?? null,
+            retryError: retry?.error ? retry.error.message : null,
+            retryStdoutLen: (retry?.stdout || "").length,
+            retryStderrLen: (retry?.stderr || "").length,
+            retryStderr: stripAnsi(retry?.stderr || "").slice(0, 300),
+          }) +
+          "\n",
+      );
+    }
     if (retry && !retry.error) {
       const retryOut = stripAnsi(retry.stdout || "");
       if (retryOut.trim()) {

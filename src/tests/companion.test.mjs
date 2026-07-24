@@ -1,5 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
+import { join } from "node:path";
 import { makeEnv, run, jobs, changeWorkingTree, scriptAvailable } from "./helpers.mjs";
 
 test("setup: reports installed agy and version", () => {
@@ -121,7 +123,25 @@ test(
   { skip: process.platform === "win32" || !scriptAvailable() },
   () => {
     const env = makeEnv({ ttyOnly: true }); // direct spawn returns empty
-    const { out } = run(env, "task", "still works under a pty");
+    const { out, err } = run(env, "task", "still works under a pty");
+    if (process.env.CI) {
+      // TEMP DIAGNOSTIC (see CLAUDE.md gotchas): confirm the macOS `script`/PTY
+      // hypothesis before removing this and the AGY_PTY_DEBUG plumbing.
+      console.log("::notice::pty-debug " + err.replace(/\n/g, " | ").slice(0, 500));
+      const rawScript = spawnSync(join(env.bin, "script"), ["-q", "/dev/null", "echo", "raw-pty-diag"], {
+        encoding: "utf8",
+      });
+      console.log(
+        "::notice::pty-raw-diag " +
+          JSON.stringify({
+            status: rawScript.status,
+            signal: rawScript.signal,
+            error: rawScript.error ? rawScript.error.message : null,
+            stdout: (rawScript.stdout || "").slice(0, 200),
+            stderr: (rawScript.stderr || "").slice(0, 200),
+          }),
+      );
+    }
     assert.match(out, /\[fake-agy\]/);
   },
 );

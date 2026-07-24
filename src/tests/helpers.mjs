@@ -92,6 +92,8 @@ export function run(env, sub, argStr = "") {
     GIT_CONFIG_NOSYSTEM: "1",
     FAKE_AGY_VERSION: env.agyVersion,
     FAKE_AGY_TTY_ONLY: env.ttyOnly ? "1" : "0",
+    // TEMP DIAGNOSTIC (see CLAUDE.md gotchas): surface script/PTY details on CI failures.
+    AGY_PTY_DEBUG: "1",
   };
   const args = [COMPANION, sub];
   if (argStr) args.push(argStr);
