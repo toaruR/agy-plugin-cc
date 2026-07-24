@@ -1,0 +1,11 @@
+# harnessを除外
+.agents/
+.claude/
+.codex/
+.cursor/
+.sandbox-kit/
+AGENTS.md
+CLAUDE.md
+docs/knowledge-kit-usage.md
+__pycache__/
+*.pyc
