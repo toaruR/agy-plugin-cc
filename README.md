@@ -26,6 +26,9 @@ Antigravity CLI. It is not affiliated with Google.
   if you hit that, the companion automatically retries via the `script` command on macOS/Linux,
   or via [`agy-headless-bridge`](https://github.com/rhishi99/agy-headless-bridge)
   (`pip install agy-headless-bridge`) on Windows if it is installed.
+- **Agent teams are experimental and disabled by default.** To use the `agy:agy-runner` agent
+  as a teammate, set `CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1` in `settings.json` or the
+  environment first. Without it, no team is set up and no teammates spawn.
 
 ## Install
 
@@ -149,6 +152,21 @@ plugins/agy/
   scripts/agy-companion.mjs         Runtime broker
   scripts/session-lifecycle-hook.mjs
 ```
+
+## Development / tests
+
+The companion has a test suite built on Node's built-in runner. It spins up an isolated
+environment for each case — a temp `HOME`, a temp git repo, and a PATH containing only
+symlinked tools plus a fake `agy` shim — then drives every subcommand end to end (setup,
+review, task, status, result, cancel, resume, and the TTY-gated fallback).
+
+```bash
+npm test
+# or: node --test "tests/**/*.test.mjs"
+```
+
+Requirements: Node 18+ and a POSIX shell (macOS/Linux, or WSL/Git Bash on Windows). The
+fake `agy` is a Node shebang script, so no real agy install or credentials are needed.
 
 ## License
 
