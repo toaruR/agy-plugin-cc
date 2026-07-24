@@ -32,7 +32,7 @@ Antigravity CLI. It is not affiliated with Google.
 Add the marketplace in Claude Code:
 
 ```
-/plugin marketplace add toaruR/agy-plugin-cc
+/plugin marketplace add <your-github-user>/agy-plugin-cc
 ```
 
 Install the plugin:
