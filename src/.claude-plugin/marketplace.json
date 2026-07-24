@@ -1,0 +1,21 @@
+{
+  "name": "antigravity-agy",
+  "owner": {
+    "name": "toaruR"
+  },
+  "metadata": {
+    "description": "Use Google Antigravity CLI (agy) from Claude Code to review code or delegate tasks.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "agy",
+      "description": "Use Antigravity CLI (agy) from Claude Code to review code or delegate tasks.",
+      "version": "0.1.0",
+      "author": {
+        "name": "toaruR"
+      },
+      "source": "./plugins/agy"
+    }
+  ]
+}

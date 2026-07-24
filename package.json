@@ -1,0 +1,11 @@
+{
+  "name": "agy-plugin-cc",
+  "version": "0.1.0",
+  "description": "Use Antigravity CLI (agy) from Claude Code to review code or delegate tasks.",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/"
+  },
+  "license": "MIT"
+}
