@@ -15,7 +15,7 @@
       "author": {
         "name": "toaruR"
       },
-      "source": "./plugins/agy"
+      "source": "./src/plugins/agy"
     }
   ]
 }
