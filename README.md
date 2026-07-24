@@ -162,11 +162,23 @@ review, task, status, result, cancel, resume, and the TTY-gated fallback).
 
 ```bash
 npm test
-# or: node --test "tests/**/*.test.mjs"
+# or: node --test "src/tests/**/*.test.mjs"
 ```
 
 Requirements: Node 18+ and a POSIX shell (macOS/Linux, or WSL/Git Bash on Windows). The
 fake `agy` is a Node shebang script, so no real agy install or credentials are needed.
+
+**Native Windows (PowerShell/cmd) is not supported for running the tests.** The test
+helpers symlink tools into an isolated PATH, and `fs.symlinkSync` fails with `EPERM` on
+Windows unless Developer Mode is enabled or the shell is elevated. Run the tests under WSL
+instead:
+
+```bash
+wsl -d <your-distro> -- bash -lc "cd /mnt/c/path/to/agy-plugin-cc && nvm use 22 && npm test"
+```
+
+Node 20 doesn't support the `--test` glob pattern used by `npm test` (`Could not find
+"src/tests/**/*.test.mjs"`) — use Node 22+, matching the CI matrix.
 
 ## License
 
