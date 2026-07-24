@@ -29,10 +29,12 @@ Antigravity CLI. It is not affiliated with Google.
 
 ## Install
 
-Add the marketplace in Claude Code:
+### Claude Code (CLI)
+
+Add the marketplace:
 
 ```
-/plugin marketplace add <your-github-user>/agy-plugin-cc
+/plugin marketplace add toaruR/agy-plugin-cc
 ```
 
 Install the plugin:
@@ -46,6 +48,20 @@ Reload plugins, then run:
 ```
 /agy:setup
 ```
+
+### Claude Code for VS Code
+
+The VS Code extension's chat has no `/plugin` command. Clone the repo locally, then add it as a
+marketplace by file path through the **Customize → Manage plugins** UI panel (not chat):
+
+```
+git clone https://github.com/toaruR/agy-plugin-cc.git
+```
+
+1. Open **Customize → Manage plugins** in the extension.
+2. Add a marketplace pointing at the local `agy-plugin-cc` path (not the GitHub URL).
+3. Install/enable `agy@antigravity-agy` from that marketplace.
+4. Start a new chat session, then run `/agy:setup`.
 
 A simple first run:
 
