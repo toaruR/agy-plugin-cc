@@ -122,7 +122,7 @@ test(
     // GitHub Actions macOS runners wire job-step stdin to a socket, not a tty/pty;
     // BSD `script` fails outright (tcgetattr/ioctl on socket) so this can't run there
     // (see CLAUDE.md gotchas).
-    skip: process.platform === "win32" || !scriptAvailable() || !!process.env.CI,
+    skip: process.platform === "win32" || !scriptAvailable() || (process.platform === "darwin" && !!process.env.CI),
   },
   () => {
     const env = makeEnv({ ttyOnly: true }); // direct spawn returns empty

@@ -40,7 +40,7 @@ Start from the user's/lead's request text and normalize only routing/execution f
 - `--background` / `--wait`: Claude-side execution controls. Strip them; never pass to `task` and
   never treat them as task text. (As a teammate you always run the Bash call synchronously in the
   foreground — an in-process teammate cannot spawn background work.)
-- `--model <name>`: forward unchanged (e.g. `gemini-3-pro`). Only when explicitly requested.
+- `--model <name>`: forward unchanged (e.g. `gemini-3.6-flash`). Only when explicitly requested.
 - `--effort <low|medium|high>`: forward unchanged. Only when explicitly requested.
 - `--mode <accept-edits|plan>`: forward unchanged. Only when explicitly requested.
 - `--resume` (or "continue", "keep going", "resume", "apply the top fix", "dig deeper"): forward
